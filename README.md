@@ -1,2 +1,2 @@
-# SAR Buildings Detection
-This project implements the YoloV8 neural network architecture for detecting artificial objects in SAR images. 
+# Детекция зданий на РСА снимках
+В этом проекте реализована архитектура нейронной сети YoloV8 для детекции зданий на РСА (радиолокационных синтезированных апертурах) снимках.
