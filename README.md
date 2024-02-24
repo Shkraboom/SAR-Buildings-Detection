@@ -10,5 +10,5 @@
 В качестве детектора была выбрана нейронная сеть YOLOv8 OBB (oriented bounding box). Функция OBB помогает более точно определять местоположение зданий и их координаты, так как зачастую они повернуты на непрямой угол.
 
 ## Технологии
-- [YoloV8](https://docs.ultralytics.com/)
+- [YOLOv8](https://docs.ultralytics.com/)
 - [Python](https://www.python.org/)
