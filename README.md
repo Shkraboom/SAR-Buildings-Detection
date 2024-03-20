@@ -51,3 +51,10 @@
 - speckle_denoising - производит фильтрацию speckle шума с помощью фильтра cv2::fastNLMeansDenoising с заданным размером окна (window size)
 - merge_images - склеивает семплы до исходного разрешения
 - predict - объединяет предыдущие методы и делает предикты с помощью обученной модели YOLOv8 Nano OBB
+
+## Финальный результат
+После применения метода 'predict' результат работы модели сохраняется в папке 'output_merge_folder'. Тестовый пример - снимок 11264 х 10404 пикселей:
+
+![test_image.png](https://github.com/Shkraboom/SAR-Buildings-Detection/blob/main/data/test_image.png)
+![predict_test_image.png](https://github.com/Shkraboom/SAR-Buildings-Detection/blob/main/data/predict_test_image.png)
+![predict_test_image_2.png](https://github.com/Shkraboom/SAR-Buildings-Detection/blob/main/data/predict_test_image_2.png)
