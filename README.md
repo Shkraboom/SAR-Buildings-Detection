@@ -40,3 +40,10 @@
 Результаты работы модели на валидационной выборке:
 
 ![val_batch0_pred.jpg](https://github.com/Shkraboom/SAR-Buildings-Detection/blob/main/data/train64_base/val_batch0_pred.jpg)
+
+## Реализация класса Model
+После обучения нужно было собрать проект целиком. Для этого я написал класс Model с такими методами:
+- split_and_save_image - делает кроп входного изображения (image_path) с заданными размером (chunk_size)
+- speckle_denoising - производит фильтрацию speckle шума с помощью фильтра cv2::fastNLMeansDenoising с заданным размером окна (window size)
+- merge_images - склеивает семплы до исходного разрешения
+- predict - объединяет предыдущие методы и делает предикты с помощью обученной модели YOLOv8 Nano OBB
