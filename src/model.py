@@ -5,8 +5,9 @@ from PIL import Image
 from ultralytics import YOLO
 import shutil
 
-
 class Model(object):
+    def __init__(self, model_path):
+        self.yolo_model = YOLO(model_path)
     def split_and_save_image(self, image_path, chunk_size = 512):#
         self.image_path = image_path
         self.chunk_size = chunk_size
@@ -96,8 +97,6 @@ class Model(object):
         self.window_size = window_size
         self.filtered = filtered
 
-        yolo_model = YOLO('/Users/daniilskrabo/PycharmProjects/SAR-Buildings-Detection/data/train64_base/weights/best.pt')
-
         output_yolo_folder = os.path.join(os.getcwd(), 'output_yolo_folder')
         shutil.rmtree(output_yolo_folder, ignore_errors = True)
         os.makedirs(output_yolo_folder, exist_ok = True)
@@ -105,7 +104,7 @@ class Model(object):
         coords = self.split_and_save_image(image_path = image_folder, chunk_size = chunk_size)
 
         if filtered:
-            output_folder = '/Users/daniilskrabo/PycharmProjects/SAR-Buildings-Detection/src/output_folder'
+            output_folder = 'output_folder'
             output_filter_folder = os.path.join(os.getcwd(), 'output_filter_folder')
             shutil.rmtree(output_filter_folder, ignore_errors = True)
             os.makedirs(output_filter_folder, exist_ok = True)
@@ -114,10 +113,10 @@ class Model(object):
                 if filename.endswith('.jpg'):
                     image_path = os.path.join(output_folder, filename)
                     self.speckle_denoising(image_path, output_filter_folder, window_size = window_size)
-            yolo_model(source=output_filter_folder, save = True, save_txt = True, show_labels = False, project = output_yolo_folder,
+            self.yolo_model(source=output_filter_folder, save = True, save_txt = True, show_labels = False, project = output_yolo_folder,
                        name='predict')
             self.merge_images(image_folder=os.path.join(output_yolo_folder, 'predict'), coords = coords, save = True)
         else:
-            output_folder = '/Users/daniilskrabo/PycharmProjects/SAR-Buildings-Detection/src/output_folder'
-            yolo_model(source = output_folder, save = True, save_txt = True, show_labels = False, project = output_yolo_folder, name = 'predict')
+            output_folder = 'output_folder'
+            self.yolo_model(source = output_folder, save = True, save_txt = True, show_labels = False, project = output_yolo_folder, name = 'predict')
             self.merge_images(image_folder = os.path.join(output_yolo_folder, 'predict'), coords = coords, save = True, chunk_size = chunk_size)
