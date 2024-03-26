@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM python:3
 
 LABEL authors="daniilskrabo"
 
@@ -14,7 +14,5 @@ RUN apt-get update && \
 RUN apt-get install -y libgl1-mesa-glx
 
 RUN apt-get install -y libglib2.0-0
-
-EXPOSE 8080
 
 CMD ["python3", "src/model.py"]
