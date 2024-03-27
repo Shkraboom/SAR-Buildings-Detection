@@ -58,7 +58,7 @@
 
 `docker pull shkraboom/sar` — загружаем образ
 
-`docker run -it shkraboom/sar /bin/bash` — запускаем образ в контейнере
+`docker run -it -v path/to/images/folder:/app/images sar /bin/bash` — запускаем образ в контейнере, а также создаем каталог со снимками
 
 `root@<container_id>:/app# python3`
 
@@ -66,7 +66,7 @@
 
 `>>> model = Model(model_path = '/app/data/train64_base/weights/last.pt')`
 
-`>>> model.predict(image_folder, chunk_size = 512, filtered = False, window_size = 20)`
+`>>> model.predict(image_path = '/app/images/your_image.jpg', chunk_size = 1024, filtered = False, window_size = 20)`
 
 ## Финальный результат
 После применения метода 'predict' результат работы модели сохраняется в папке 'output_merge_folder'. Тестовый пример - снимок 11264 х 10404 пикселей:

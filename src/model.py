@@ -91,8 +91,8 @@ class Model(object):
         else:
             return merged_image
 
-    def predict(self, image_folder, chunk_size = 512, filtered = False, window_size = 20):
-        self.image_folder = image_folder
+    def predict(self, image_path, chunk_size = 512, filtered = False, window_size = 20):
+        self.image_path = image_path
         self.chunk_size = chunk_size
         self.window_size = window_size
         self.filtered = filtered
@@ -101,7 +101,7 @@ class Model(object):
         shutil.rmtree(output_yolo_folder, ignore_errors = True)
         os.makedirs(output_yolo_folder, exist_ok = True)
 
-        coords = self.split_and_save_image(image_path = image_folder, chunk_size = chunk_size)
+        coords = self.split_and_save_image(image_path = image_path, chunk_size = chunk_size)
 
         if filtered:
             output_folder = 'output_folder'
