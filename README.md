@@ -52,6 +52,21 @@
 - merge_images - склеивает семплы до исходного разрешения
 - predict - объединяет предыдущие методы и делает предикты с помощью обученной модели YOLOv8 Nano OBB
 
+## Образ Docker
+Также я создал образ в Docker и выложил его в [DockerHub](https://hub.docker.com/repository/docker/shkraboom/sar/general):
+
+`docker pull shkraboom/sar` — загружаем образ
+
+`docker run -it shkraboom/sar /bin/bash` — запускаем образ в контейнере
+
+`root@<container_id>:/app# python3`
+
+`>>> from model import Model`
+
+`>>> model = Model(model_path = '/app/data/train64_base/weights/last.pt')`
+
+`>>> model.predict(image_folder, chunk_size = 512, filtered = False, window_size = 20)`
+
 ## Финальный результат
 После применения метода 'predict' результат работы модели сохраняется в папке 'output_merge_folder'. Тестовый пример - снимок 11264 х 10404 пикселей:
 
