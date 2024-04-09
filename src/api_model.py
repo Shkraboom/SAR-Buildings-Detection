@@ -6,7 +6,7 @@ from src.model import Model
 
 app = FastAPI(title="SAR-Buildings-Detection")
 
-MODEL_PATH = "path/to/weights.pt"
+MODEL_PATH = "/Users/daniilskrabo/PycharmProjects/SAR-Buildings-Detection/data/train64_base/weights/best.pt"
 
 model = Model(MODEL_PATH)
 
@@ -17,6 +17,6 @@ async def predict_image(file: UploadFile = File(...)):
         tmp.close()
         tmp_path = tmp.name
 
-    model.predict(image_path=tmp_path, chunk_size=1024)
+    model.predict(image_path=tmp_path, chunk_size=512)
 
     return 'Succesfull!'
