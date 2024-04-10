@@ -2,3 +2,6 @@ opencv-contrib-python
 ultralytics
 fastapi
 pydantic
+datetime
+shortuuid
+python-multipart

@@ -12,14 +12,14 @@ class Model(object):
         self.image_path = image_path
         self.chunk_size = chunk_size
 
-        img = Image.open(image_path) #Входной снимок
+        img = Image.open(image_path)
 
         cwd = os.getcwd()
         new_dir = 'output_folder'
         path = os.path.join(cwd, new_dir)
 
         shutil.rmtree(path, ignore_errors = True)
-        os.makedirs(path, exist_ok = True)  # Создание выходной папки
+        os.makedirs(path, exist_ok = True)
 
         nump_chunks = []
         width, height = img.size
@@ -57,12 +57,12 @@ class Model(object):
         self.save = save
         self.chunk_size = chunk_size
 
-        num_chunks_horizontal = coords['x'] #Получаем количество кусочков по горизонтали и вертикали
+        num_chunks_horizontal = coords['x']
         num_chunks_vertical = coords['y']
 
-        image_rows = [] #Создаем двумерный массив для хранения строк изображений
+        image_rows = []
 
-        for y in range(num_chunks_vertical): #Сначала склеиваем строки по горизонтали
+        for y in range(num_chunks_vertical):
             row_images = []
             for x in range(num_chunks_horizontal):
                 filename = f"chunk_{x * chunk_size}_{y * chunk_size}.jpg"
@@ -72,11 +72,11 @@ class Model(object):
 
                 row_images.append(image)
 
-            row_merged = np.hstack(row_images) #Склеиваем все изображения в строке по горизонтали
+            row_merged = np.hstack(row_images)
 
-            image_rows.append(row_merged) #Добавляем текущую строку в общий массив строк
+            image_rows.append(row_merged)
 
-        merged_image = np.vstack(image_rows) #Склеиваем все строки изображений по вертикали
+        merged_image = np.vstack(image_rows)
 
         if save:
             output_folder = os.path.join(os.getcwd(), 'output_merge_folder')
@@ -87,7 +87,7 @@ class Model(object):
 
             cv2.imwrite(output_filename, merged_image)
 
-            return output_filename
+            return merged_image
         else:
             return merged_image
 
@@ -105,18 +105,17 @@ class Model(object):
 
         if filtered:
             output_folder = 'output_folder'
-            output_filter_folder = os.path.join(os.getcwd(), 'output_filter_folder')
-            shutil.rmtree(output_filter_folder, ignore_errors = True)
-            os.makedirs(output_filter_folder, exist_ok = True)
 
             for filename in os.listdir(output_folder):
                 if filename.endswith('.jpg'):
                     image_path = os.path.join(output_folder, filename)
-                    self.speckle_denoising(image_path, output_filter_folder, window_size = window_size)
-            self.yolo_model(source=output_filter_folder, save = True, save_txt = True, show_labels = False, project = output_yolo_folder,
+                    self.speckle_denoising(image_path, output_folder, window_size = window_size)
+            self.yolo_model(source=output_folder, save = True, save_txt = True, show_labels = False, project = output_yolo_folder,
                        name='predict')
-            self.merge_images(image_folder=os.path.join(output_yolo_folder, 'predict'), coords = coords, save = True)
+            pred = self.merge_images(image_folder=os.path.join(output_yolo_folder, 'predict'), coords = coords, save = True)
         else:
             output_folder = 'output_folder'
             self.yolo_model(source = output_folder, save = True, save_txt = True, show_labels = False, project = output_yolo_folder, name = 'predict')
-            self.merge_images(image_folder = os.path.join(output_yolo_folder, 'predict'), coords = coords, save = True, chunk_size = chunk_size)
+            pred = self.merge_images(image_folder = os.path.join(output_yolo_folder, 'predict'), coords = coords, save = True, chunk_size = chunk_size)
+
+        return pred

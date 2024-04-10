@@ -25,7 +25,7 @@
 Для эффективной разметки я написал метод 'split_and_save_image', который делит изображение на семлы заданного разрешения. Разметку я производил в CVAT. В этом софте можно поворачивать bounding box'ы на определенный угол, что требуется для моего проекта.
 Однако из-за частой смазанности самих РСА снимков, разметку проводить не удавалось - здания не видны. Поэтому я сделал дополнительную разметку зданий с помощью [OpenStreetMap](https://www.openstreetmap.org/#map=13/-33.4377/-70.7966&layers=N) и его API [Overpass API](https://overpass-turbo.eu/).
 
-![labeling.jpg](https://github.com/Shkraboom/SAR-Buildings-Detection/blob/main/data/labeling.jpg)
+![labeling.jpg](https://github.com/Shkraboom/SAR-Buildings-Detection/blob/main/data/metrics/labeling.jpg)
 
 Далее для разбивки на тренировочную, валидационную и тестовую выборки я написал скрипт 'randomizer_dataset'.
 
@@ -71,6 +71,6 @@
 ## Финальный результат
 После применения метода 'predict' результат работы модели сохраняется в папке 'output_merge_folder'. Тестовый пример - снимок 11264 х 10404 пикселей:
 
-![test_image.png](https://github.com/Shkraboom/SAR-Buildings-Detection/blob/main/data/test_image.png)
-![predict_test_image.png](https://github.com/Shkraboom/SAR-Buildings-Detection/blob/main/data/predict_test_image.png)
-![predict_test_image_2.png](https://github.com/Shkraboom/SAR-Buildings-Detection/blob/main/data/predict_test_image_2.png)
+![test_image.png](https://github.com/Shkraboom/SAR-Buildings-Detection/blob/main/data/metrics/test_image.png)
+![predict_test_image.png](https://github.com/Shkraboom/SAR-Buildings-Detection/blob/main/data/metrics/predict_test_image.png)
+![predict_test_image_2.png](https://github.com/Shkraboom/SAR-Buildings-Detection/blob/main/data/metrics/predict_test_image_2.png)
