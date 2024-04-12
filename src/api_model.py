@@ -22,7 +22,7 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS predictions
                   request_time TIMESTAMP)''')
 conn.commit()
 
-MODEL_PATH = "/app/data/train64_base/weights/best.pt"
+MODEL_PATH = "/app/data/train64_base/weights/last.pt"
 OUTPUT_FOLDER = "/app/data/SQLite/predictions"
 ORIGINAL_FOLDER = "/app/data/SQLite/originals"
 
