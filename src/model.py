@@ -8,7 +8,10 @@ import shutil
 class Model(object):
     def __init__(self, model_path):
         self.yolo_model = YOLO(model_path)
-    def split_and_save_image(self, image_path, chunk_size = 512):#
+    def split_and_save_image(self, image_path, chunk_size = 512):
+        """
+        Кроп снимков и сохранение фрагментов
+        """
         self.image_path = image_path
         self.chunk_size = chunk_size
 
@@ -41,6 +44,9 @@ class Model(object):
         return coords
 
     def speckle_denoising(self, image_path, output_folder, window_size = 20):
+        """
+        Фильтрация speckle-шума
+        """
         self.image_path = image_path
         self.window_size = window_size
 
@@ -52,6 +58,9 @@ class Model(object):
         return output_filename
 
     def merge_images(self, image_folder, coords, save = True, chunk_size = 512):
+        """
+        Склейка снимка до исходного изображения
+        """
         self.image_folder = image_folder
         self.coords = coords
         self.save = save
@@ -92,6 +101,9 @@ class Model(object):
             return merged_image
 
     def predict(self, image_path, chunk_size = 512, filtered = False, window_size = 20):
+        """
+        Предсказание на снимке
+        """
         self.image_path = image_path
         self.chunk_size = chunk_size
         self.window_size = window_size
