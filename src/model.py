@@ -10,7 +10,7 @@ class Model(object):
         self.yolo_model = YOLO(model_path)
     def split_and_save_image(self, image_path, chunk_size = 512):
         """
-        Кроп снимков и сохранение фрагментов
+        Cropping pictures and saving fragments
         """
         self.image_path = image_path
         self.chunk_size = chunk_size
@@ -45,7 +45,7 @@ class Model(object):
 
     def speckle_denoising(self, image_path, output_folder, window_size = 20):
         """
-        Фильтрация speckle-шума
+        Speckle-denoising
         """
         self.image_path = image_path
         self.window_size = window_size
@@ -59,7 +59,7 @@ class Model(object):
 
     def merge_images(self, image_folder, coords, save = True, chunk_size = 512):
         """
-        Склейка снимка до исходного изображения
+        Stitching the photo to the original image
         """
         self.image_folder = image_folder
         self.coords = coords
@@ -102,7 +102,7 @@ class Model(object):
 
     def predict(self, image_path, chunk_size = 512, filtered = False, window_size = 20):
         """
-        Предсказание на снимке
+        Predict on image
         """
         self.image_path = image_path
         self.chunk_size = chunk_size
