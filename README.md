@@ -1,5 +1,5 @@
-# Building detection on PCA images
-This project implements the YOLOv8 neural network architecture for building detection on PCA (radar synthesised aperture radar) images.
+# Building detection on SAR images
+This project implements the YOLOv8 neural network architecture for building detection on SAR (synthesised aperture radar) images.
 
 ## Table of Contents
 - [Project Description](#project-description)
